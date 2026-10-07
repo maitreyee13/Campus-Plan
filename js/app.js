@@ -421,13 +421,21 @@ async function removeItem(type, id) {
 function closeModal() { $("#modal-root").innerHTML = ""; state.modalTrigger?.focus?.(); state.modalTrigger = null; }
 
 function handleAction(event) {
-  const target = event.target.closest("[data-action], [data-view-link], [data-view], [data-auth-view], [data-close-modal], [data-calendar-date]");
+  const closeTarget = event.target.closest?.("[data-close-modal]");
+  if (closeTarget && (closeTarget.tagName === "BUTTON" || closeTarget === event.target)) {
+    event.preventDefault();
+    closeModal();
+    return;
+  }
+  const target = event.target.closest?.("[data-action], [data-view-link], [data-view], [data-auth-view], [data-calendar-date]");
   if (!target) return;
-  if (target.dataset.closeModal !== undefined) { if (target.classList.contains("modal-backdrop") || target.closest(".modal") === null || target.tagName === "BUTTON") closeModal(); return; }
   if (target.dataset.authView) { setAuthView(target.dataset.authView); return; }
   if (target.dataset.viewLink || target.dataset.view) { setView(target.dataset.viewLink || target.dataset.view); return; }
   if (target.dataset.calendarDate) { state.selectedDate = target.dataset.calendarDate; const date = dateFromKey(state.selectedDate); state.calendarMonth = new Date(date.getFullYear(), date.getMonth(), 1); renderCalendar(); return; }
   const action = target.dataset.action; const id = target.dataset.id;
+  if (!action) return;
+  event.preventDefault();
+  event.stopPropagation();
   if (action === "add-task") openRecordModal("task");
   else if (action === "add-assignment") openRecordModal("assignment");
   else if (action === "add-exam") openRecordModal("exam");
