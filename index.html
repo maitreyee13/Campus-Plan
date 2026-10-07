@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f8f8fc" />
+  <meta name="description" content="CampusPlan — a calm, cloud-synced planner for college life." />
+  <title>CampusPlan — College Girl Planner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+  <div id="app" class="app-shell">
+    <section id="auth-screen" class="auth-screen" aria-labelledby="auth-title">
+      <div class="auth-art" aria-hidden="true">
+        <div class="auth-orbit orbit-one"></div>
+        <div class="auth-orbit orbit-two"></div>
+        <div class="auth-sparkle sparkle-one">✦</div>
+        <div class="auth-sparkle sparkle-two">✧</div>
+        <div class="auth-note-card note-card-one"><span>Today</span><strong>4 / 6</strong><small>tasks done</small></div>
+        <div class="auth-note-card note-card-two"><span>Streak</span><strong>07</strong><small>days in a row</small></div>
+        <div class="auth-art-copy"><span class="eyebrow">A softer way to stay on track</span><h2>Small wins<br><em>compound.</em></h2><p>One calm corner for tasks, classes, deadlines, and the things that make your week yours.</p></div>
+      </div>
+      <div class="auth-panel">
+        <div class="brand brand-auth"><span class="brand-mark">✦</span><span>Campus<span>Plan</span></span></div>
+        <div class="auth-copy"><span class="eyebrow">YOUR DAILY COMMAND CENTER</span><h1 id="auth-title">Make today feel lighter.</h1><p>Plan the next right thing, then let the rest wait.</p></div>
+        <div id="setup-banner" class="setup-banner hidden" role="status"></div>
+        <form id="login-form" class="auth-form" novalidate>
+          <label>Email address<input id="login-email" type="email" autocomplete="email" placeholder="you@example.com" required /></label>
+          <label>Password<div class="password-field"><input id="login-password" type="password" autocomplete="current-password" placeholder="Your password" required /><button class="icon-button" type="button" data-toggle-password="login-password" aria-label="Show password">◉</button></div></label>
+          <div class="form-row form-row-end"><button type="button" class="text-button" data-auth-view="forgot">Forgot password?</button></div>
+          <button class="button button-primary button-wide" type="submit"><span>Sign in</span><span class="button-arrow">→</span></button>
+          <p id="login-message" class="form-message" aria-live="polite"></p>
+          <p class="auth-switch">New here? <button class="text-button" type="button" data-auth-view="register">Create an account</button></p>
+        </form>
+        <form id="register-form" class="auth-form hidden" novalidate>
+          <label>Your name<input id="register-name" type="text" autocomplete="name" placeholder="Sarah Chen" required /></label>
+          <label>Email address<input id="register-email" type="email" autocomplete="email" placeholder="you@example.com" required /></label>
+          <label>Password<div class="password-field"><input id="register-password" type="password" autocomplete="new-password" placeholder="8+ characters" required /><button class="icon-button" type="button" data-toggle-password="register-password" aria-label="Show password">◉</button></div></label>
+          <label>Confirm password<input id="register-confirm" type="password" autocomplete="new-password" placeholder="Repeat your password" required /></label>
+          <button class="button button-primary button-wide" type="submit"><span>Create account</span><span class="button-arrow">→</span></button>
+          <p id="register-message" class="form-message" aria-live="polite"></p>
+          <p class="auth-switch">Already have an account? <button class="text-button" type="button" data-auth-view="login">Sign in</button></p>
+        </form>
+        <form id="forgot-form" class="auth-form hidden" novalidate>
+          <div class="form-icon">✉</div><h3>Reset your password</h3><p class="muted">We’ll send a reset link to your email.</p>
+          <label>Email address<input id="forgot-email" type="email" autocomplete="email" placeholder="you@example.com" required /></label>
+          <button class="button button-primary button-wide" type="submit">Send reset link <span class="button-arrow">→</span></button>
+          <p id="forgot-message" class="form-message" aria-live="polite"></p>
+          <p class="auth-switch"><button class="text-button" type="button" data-auth-view="login">← Back to sign in</button></p>
+        </form>
+        <button id="preview-button" class="preview-link" type="button">Explore the interface preview <span>↗</span></button>
+      </div>
+    </section>
+
+    <section id="planner-screen" class="planner-screen hidden">
+      <aside id="sidebar" class="sidebar" aria-label="Main navigation">
+        <div class="sidebar-top"><div class="brand"><span class="brand-mark">✦</span><span>Campus<span>Plan</span></span></div><button id="close-nav" class="icon-button mobile-only" aria-label="Close navigation">×</button></div>
+        <div class="profile-mini"><div id="avatar" class="avatar">SC</div><div><strong id="sidebar-name">Sarah Chen</strong><span id="sidebar-email">sarah@example.com</span></div><button id="sidebar-profile" class="icon-button" aria-label="Open settings">···</button></div>
+        <nav class="nav-list">
+          <p class="nav-label">WORKSPACE</p>
+          <button class="nav-item active" data-view="dashboard"><span class="nav-icon">⌂</span><span>Overview</span></button>
+          <button class="nav-item" data-view="tasks"><span class="nav-icon">✓</span><span>Daily tasks</span><span class="nav-count" id="nav-task-count">4</span></button>
+          <button class="nav-item" data-view="calendar"><span class="nav-icon">▦</span><span>Calendar</span></button>
+          <button class="nav-item" data-view="assignments"><span class="nav-icon">◫</span><span>Assignments</span></button>
+          <button class="nav-item" data-view="exams"><span class="nav-icon">◷</span><span>Exam tracker</span></button>
+          <button class="nav-item" data-view="timetable"><span class="nav-icon">☷</span><span>Timetable</span></button>
+          <p class="nav-label nav-label-spaced">PERSONAL</p>
+          <button class="nav-item" data-view="notes"><span class="nav-icon">⌑</span><span>Notes</span></button>
+          <button class="nav-item" data-view="events"><span class="nav-icon">✦</span><span>Events</span></button>
+        </nav>
+        <div class="sidebar-bottom"><button class="nav-item" data-view="settings"><span class="nav-icon">⚙</span><span>Settings</span></button><div class="sidebar-tip"><span class="tip-icon">✺</span><div><strong>One thing at a time</strong><small>Your focus is enough for today.</small></div></div></div>
+      </aside>
+      <div id="sidebar-scrim" class="sidebar-scrim"></div>
+      <main class="main-content">
+        <header class="topbar"><button id="open-nav" class="icon-button mobile-only" aria-label="Open navigation">☰</button><div class="breadcrumbs"><span id="view-kicker">OVERVIEW</span><span class="breadcrumb-dot">·</span><span id="view-title">Today</span></div><div class="topbar-actions"><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" aria-pressed="false"><span class="theme-sun">☼</span><span class="theme-moon">☾</span></button><button id="notification-button" class="icon-button notification-button" aria-label="Show notifications"><span>♧</span><i></i></button><button id="top-avatar" class="avatar avatar-small" aria-label="Open settings">SC</button></div></header>
+        <div class="content-wrap">
+          <div id="preview-mode-bar" class="preview-mode-bar hidden"><span>Preview mode</span><span>Changes are temporary and reset when you leave. Connect Supabase in <code>js/config.js</code> to enable secure cloud sync and accounts.</span><button id="preview-exit" class="text-button">Return to sign in</button></div>
+          <section id="view-dashboard" class="page-view active-view" data-page-title="Today" data-page-kicker="OVERVIEW">
+            <div class="welcome-row"><div><span class="eyebrow" id="date-label">TUESDAY, OCTOBER 7</span><h1 id="greeting">Good morning, Sarah <span class="greeting-spark">✦</span></h1><p class="page-intro">Let’s make today feel lighter.</p></div><button class="button button-primary quick-add-trigger" data-action="add-task">+ <span>Quick add</span></button></div>
+            <div class="stats-grid"><article class="stat-card stat-card-primary"><div class="stat-card-head"><span>Today’s progress</span><span class="stat-icon">↗</span></div><div class="progress-stat"><strong id="progress-percent">67<span>%</span></strong><div><span id="progress-copy">4 of 6 tasks complete</span><div class="progress-track"><span id="progress-bar" style="width:67%"></span></div></div></div><div class="stat-foot"><span><i class="status-dot dot-mint"></i><span id="remaining-copy">2 tasks remaining</span></span><button class="text-button" data-view-link="tasks">View tasks →</button></div></article><article class="stat-card stat-card-streak"><div class="stat-card-head"><span>Current streak</span><span class="stat-icon">✺</span></div><div class="streak-value"><strong id="streak-current">07</strong><span>days</span></div><p id="streak-message">Keep the rhythm going — you’re doing great.</p><div class="streak-dots" id="streak-dots"></div></article><article class="stat-card stat-card-soft"><div class="stat-card-head"><span>Next up</span><span class="stat-icon">→</span></div><strong id="next-deadline">Research methods</strong><p id="next-deadline-meta">Due tomorrow · Assignment</p><div class="mini-date"><span class="mini-date-day">08</span><span>OCT<br><small>WED</small></span></div></article></div>
+            <div class="dashboard-grid"><div class="primary-column"><section class="panel task-panel"><div class="panel-heading"><div><span class="eyebrow">FOCUS LIST</span><h2>Today’s tasks</h2></div><button class="button button-ghost" data-action="add-task">+ Add task</button></div><div id="dashboard-tasks" class="task-list"></div><button class="panel-footer-link" data-view-link="tasks">See all daily tasks <span>→</span></button></section><section class="panel schedule-panel"><div class="panel-heading"><div><span class="eyebrow">YOUR DAY</span><h2>Today’s schedule</h2></div><button class="text-button" data-view-link="timetable">Full timetable →</button></div><div id="dashboard-schedule" class="schedule-list"></div></section></div><aside class="secondary-column"><section class="panel upcoming-panel"><div class="panel-heading"><div><span class="eyebrow">DON’T FORGET</span><h2>Upcoming</h2></div><button class="icon-button" aria-label="More upcoming options">···</button></div><div id="dashboard-upcoming" class="upcoming-list"></div></section><section class="panel encouragement-panel"><span class="encouragement-mark">✦</span><h3>Progress, not<br>perfection.</h3><p>A little done is still a little closer.</p><button class="text-button" data-view-link="settings">Make it yours →</button></section></aside></div>
+          </section>
+          <section id="view-tasks" class="page-view" data-page-title="Daily tasks" data-page-kicker="WORKSPACE"><div class="page-heading"><div><span class="eyebrow">YOUR DAY, YOUR PACE</span><h1>Daily tasks</h1><p class="page-intro">Turn the open loops into small, finishable wins.</p></div><button class="button button-primary" data-action="add-task">+ Add task</button></div><div class="toolbar"><div class="search-box"><span>⌕</span><input id="task-search" type="search" placeholder="Search tasks" aria-label="Search tasks"></div><select id="task-filter" aria-label="Filter tasks"><option value="all">All tasks</option><option value="open">Open</option><option value="done">Completed</option></select><select id="task-category-filter" aria-label="Filter by category"><option value="all">All categories</option><option>College</option><option>Study</option><option>Personal</option><option>Health</option><option>Shopping</option></select></div><section class="panel"><div class="task-summary-row"><div><span class="eyebrow">TODAY</span><h2 id="task-summary">4 / 6 completed</h2></div><div class="task-summary-stats"><span><strong id="tasks-total">6</strong>Total</span><span><strong id="tasks-done">4</strong>Done</span><span><strong id="tasks-left">2</strong>Left</span></div></div><div id="all-tasks" class="task-list task-list-large"></div></section></section>
+          <section id="view-calendar" class="page-view" data-page-title="Calendar" data-page-kicker="WORKSPACE"><div class="page-heading"><div><span class="eyebrow">SEE THE WHOLE MONTH</span><h1>Calendar</h1><p class="page-intro">A clear view of the moving pieces.</p></div><button class="button button-primary" data-action="add-event">+ Add event</button></div><section class="calendar-layout"><div class="panel calendar-panel"><div class="calendar-header"><button class="icon-button" id="calendar-prev" aria-label="Previous month">←</button><h2 id="calendar-month">October 2026</h2><button class="icon-button" id="calendar-next" aria-label="Next month">→</button><button class="button button-ghost button-today" id="calendar-today">Today</button></div><div class="calendar-weekdays"><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span><span>SUN</span></div><div id="calendar-grid" class="calendar-grid"></div><div class="calendar-legend"><span><i class="legend-dot dot-lavender"></i>Tasks</span><span><i class="legend-dot dot-coral"></i>Deadlines</span><span><i class="legend-dot dot-mint"></i>Events</span></div></div><div class="panel selected-day-panel"><span class="eyebrow">SELECTED DAY</span><h2 id="selected-date-title">Tuesday, October 7</h2><div id="selected-day-items"></div><button class="button button-ghost button-wide" data-action="add-task">+ Add task for this day</button></div></section></section>
+          <section id="view-assignments" class="page-view" data-page-title="Assignments" data-page-kicker="WORKSPACE"><div class="page-heading"><div><span class="eyebrow">DEADLINES, WITHOUT THE DRAMA</span><h1>Assignments</h1><p class="page-intro">Keep the next hand-in within reach.</p></div><button class="button button-primary" data-action="add-assignment">+ Add assignment</button></div><div class="toolbar"><div class="search-box"><span>⌕</span><input id="assignment-search" type="search" placeholder="Search assignments" aria-label="Search assignments"></div><select id="assignment-view-filter" aria-label="Filter assignments"><option value="all">All assignments</option><option value="upcoming">Upcoming</option><option value="completed">Completed</option><option value="overdue">Overdue</option></select><select id="assignment-sort" aria-label="Sort assignments"><option value="date">Due date</option><option value="priority">Priority</option><option value="subject">Subject</option></select></div><section class="panel"><div id="assignment-list" class="record-list"></div></section></section>
+          <section id="view-exams" class="page-view" data-page-title="Exam tracker" data-page-kicker="WORKSPACE"><div class="page-heading"><div><span class="eyebrow">PREP WITH LESS PANIC</span><h1>Exam tracker</h1><p class="page-intro">Put the date on the wall before it sneaks up on you.</p></div><button class="button button-primary" data-action="add-exam">+ Add exam</button></div><section class="record-grid" id="exam-list"></section></section>
+          <section id="view-timetable" class="page-view" data-page-title="Timetable" data-page-kicker="WORKSPACE"><div class="page-heading"><div><span class="eyebrow">YOUR WEEK AT A GLANCE</span><h1>Timetable</h1><p class="page-intro">Make space for the work and the life around it.</p></div><button class="button button-primary" data-action="add-timetable">+ Add class</button></div><div class="panel timetable-panel"><div class="timetable-scroll"><div id="timetable-grid" class="timetable-grid"></div></div><div id="timetable-records" class="timetable-records"></div></div></section>
+          <section id="view-notes" class="page-view" data-page-title="Notes" data-page-kicker="PERSONAL"><div class="page-heading"><div><span class="eyebrow">THOUGHTS, CAPTURED</span><h1>Notes</h1><p class="page-intro">A quiet place for ideas before they become to-dos.</p></div><button class="button button-primary" data-action="add-note">+ Add note</button></div><div class="toolbar"><div class="search-box"><span>⌕</span><input id="note-search" type="search" placeholder="Search notes" aria-label="Search notes"></div></div><section class="notes-grid" id="notes-list"></section></section>
+          <section id="view-events" class="page-view" data-page-title="Events" data-page-kicker="PERSONAL"><div class="page-heading"><div><span class="eyebrow">THE LIFE AROUND YOUR LIST</span><h1>Events</h1><p class="page-intro">Birthdays, campus moments, appointments — all in one place.</p></div><button class="button button-primary" data-action="add-event">+ Add event</button></div><section class="panel"><div id="event-list" class="record-list"></div></section></section>
+          <section id="view-settings" class="page-view" data-page-title="Settings" data-page-kicker="PERSONAL"><div class="page-heading"><div><span class="eyebrow">MAKE IT YOURS</span><h1>Settings</h1><p class="page-intro">A few small choices to make the planner fit.</p></div></div><div class="settings-grid"><section class="panel settings-card"><div class="settings-card-heading"><div class="avatar avatar-large" id="settings-avatar">SC</div><div><h2>Profile</h2><p class="muted">Keep your details current.</p></div></div><form id="profile-form" class="settings-form"><label>Display name<input id="profile-name" type="text" autocomplete="name"></label><label>Email address<input id="profile-email" type="email" disabled></label><button class="button button-primary" type="submit">Save profile</button><p id="profile-message" class="form-message" aria-live="polite"></p></form></section><section class="panel settings-card"><div class="settings-card-heading"><div class="settings-icon">☼</div><div><h2>Appearance</h2><p class="muted">Choose the atmosphere you work best in.</p></div></div><div class="setting-row"><div><strong>Dark mode</strong><span>Use a darker palette at night.</span></div><button id="settings-theme-toggle" class="switch" type="button" role="switch" aria-label="Toggle dark mode" aria-checked="false"><span></span></button></div><div class="setting-row"><div><strong>Gentle reminders</strong><span>Keep the encouragement, skip the noise.</span></div><button class="switch is-on" data-setting-toggle="reminders" type="button" role="switch" aria-label="Toggle gentle reminders" aria-checked="true"><span></span></button></div></section><section class="panel settings-card account-card"><div class="settings-card-heading"><div class="settings-icon soft-coral">✦</div><div><h2>Account snapshot</h2><p class="muted">Your progress, at a glance.</p></div></div><div class="account-stats"><span><strong id="settings-streak">07</strong>current streak</span><span><strong id="settings-longest">14</strong>longest streak</span><span><strong id="settings-completed">28</strong>tasks completed</span></div><button id="logout-button" class="button button-danger" type="button">Log out</button></section></div></section>
+        </div>
+      </main>
+    </section>
+  </div>
+  <div id="modal-root" class="modal-root" aria-live="polite"></div>
+  <div id="toast-region" class="toast-region" aria-live="polite" aria-atomic="true"></div>
+</body>
+</html>
